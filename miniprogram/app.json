@@ -1,0 +1,18 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/addcity/addcity",
+    "pages/search/search"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "允许定位" 
+    }},
+  "window":{
+    "navigationBarBackgroundColor": "#304047",
+    "navigationBarTitleText": "天气探测系统",
+    "navigationBarTextStyle":"white"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,15 @@
+<!--pages/search/search.wxml-->
+<view class="outer-searchbox">
+  <view class="inner-searchbox-top"> 
+    <view>输入城市名称</view>
+    <view>
+      <view>
+        <input class="searchinput" bindtap="changefocus" bindconfirm="requireData" focus='{{isfocus}}' type="text" confirm-type="search" />
+      </view> 
+      <text bindtap="cancelfocus" style="font-weight:300">取消</text>
+    </view>
+  </view>
+  <view class="inner-searchbox-bottom">
+    <view class="inner-searchbox-bottom-res" data-text='{{item}}' catchtap="gotoAddcity" wx:for="{{found_city}}" wx:key="id">{{item.name}}</view>
+  </view>
+</view>

@@ -1,0 +1,8 @@
+<!--components/Box/Box.wxml-->
+<view class="big-box">
+  <view class="small-box" wx:for="{{futureWeather}}" wx:key="fxDate">
+    <view class="min-box">{{index===0?"今天":""}}{{index===1?"明天":""}}{{index===2?"后天":""}}</view>
+    <image class="image" src="{{item.iconDay}}"></image>
+    <view class="min-box">{{item.tempMin+'~'+item.tempMax+'℃'}}</view>
+  </view>
+</view>

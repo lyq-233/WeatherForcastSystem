@@ -1,0 +1,35 @@
+<view class="out-box">
+  <image class='background' bindload="checkLoad" src="{{bgImgSrc}}" mode="aspectFill"></image>
+  <view class="top location">
+    <view id="location-province">{{city}}</view>
+    <view id="location-weathernow">{{now_weather.text}} </view>
+    <view id="location-tempnow">{{now_weather.temp}}</view>
+  </view>
+  <view class="middle">
+    <view class="box-header">{{week}}</view>
+    <Box futureWeather="{{future_weather}}"></Box>
+    <view class="box-footer" >
+      <view class="box-footer-line1">空气质量指数</view>
+      <view class="box-footer-line2">{{now_air.aqi}}</view>
+    </view>
+    <view class="box-footer" >
+      <view class="box-footer-line1">空气质量指数等级</view>
+      <view class="box-footer-line2">{{now_air.level}}</view>
+    </view>
+    <view class="box-footer" >
+      <view class="box-footer-line1">主要污染物</view>
+      <view class="box-footer-line2">{{now_air.primary}}</view>
+    </view>
+    <view class="box-footer" >
+      <view class="box-footer-line1">SO<text class="text-2">2</text>含量</view>
+      <view class="box-footer-line2">{{now_air.pm2p5}}</view>
+    </view>
+    <view class="box-footer" >
+      <view class="box-footer-line1">PM10</view>
+      <view class="box-footer-line2">{{now_air.pm10}}</view>
+    </view>
+  </view>
+  <view class="footer">
+    <icon catchtap="changePath" class="iconfont icon-gengduo" style="font-size:40rpx;color:white;float:right;padding:0 20rpx"></icon>
+  </view>
+</view>

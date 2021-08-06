@@ -1,0 +1,16 @@
+<!--pages/addcity/addcity.wxml-->
+  <view class="outer-citybox" >
+      <view class="inner-citybox" catchtap="gotoMain" wx:for="{{allcity}}" wx:key="_id" 
+      data-text='{{item}}'> 
+        <view class="inner-citybox-left">
+          <view>{{item.nowdate}}</view>
+          <view>{{item.city}}</view>
+        </view>
+        <view class="inner-citybox-right">
+          {{item.temp}}
+        </view>
+      </view>
+      <view class="inner-citybox-last">
+        <view catchtap="gotoSearch"><icon class="iconfont icon-add-circle" style="font-size:50rpx"></icon></view>
+      </view>
+  </view>

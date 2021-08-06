@@ -1,0 +1,25 @@
+/* components/Box/Box.wxss */
+.big-box{
+  display: flex;
+  overflow: scroll;
+  justify-content: space-around;
+  height:230rpx;
+  border-top: 1rpx solid rgb(149, 186, 215);
+  border-bottom: 1rpx solid rgb(149, 186, 215);
+}
+.small-box{
+  flex:1 0 auto;
+  height:200rpx;
+  width:270rpx;
+  text-align: center;
+}
+
+.min-box{
+  color:white;
+  height:63rpx;
+  line-height: 63rpx;
+}
+.image{
+  width:90rpx;
+  height:90rpx;
+}
