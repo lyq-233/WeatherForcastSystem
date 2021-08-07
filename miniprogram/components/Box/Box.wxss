@@ -2,7 +2,7 @@
 .big-box{
   display: flex;
   overflow: scroll;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   height:230rpx;
   border-top: 1rpx solid rgb(149, 186, 215);
   border-bottom: 1rpx solid rgb(149, 186, 215);
@@ -10,7 +10,7 @@
 .small-box{
   flex:1 0 auto;
   height:200rpx;
-  width:270rpx;
+  width:200rpx;
   text-align: center;
 }
 

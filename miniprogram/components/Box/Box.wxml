@@ -1,8 +1,16 @@
 <!--components/Box/Box.wxml-->
 <view class="big-box">
   <view class="small-box" wx:for="{{futureWeather}}" wx:key="fxDate">
-    <view class="min-box">{{index===0?"今天":""}}{{index===1?"明天":""}}{{index===2?"后天":""}}</view>
+    <view class="min-box">{{week[index]}}</view>
     <image class="image" src="{{item.iconDay}}"></image>
     <view class="min-box">{{item.tempMin+'~'+item.tempMax+'℃'}}</view>
+  </view>
+</view>
+<view></view>
+<view class="big-box">
+  <view class="small-box" wx:for="{{hours}}" wx:key="fxDate">
+    <view class="min-box">{{item.hourtime}}</view>
+    <image class="image" src="{{item.icon}}"></image>
+    <view class="min-box">{{item.temp}}</view>
   </view>
 </view>

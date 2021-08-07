@@ -6,8 +6,10 @@
     <view id="location-tempnow">{{now_weather.temp}}</view>
   </view>
   <view class="middle">
-    <view class="box-header">{{week}}</view>
-    <Box futureWeather="{{future_weather}}"></Box>
+    <Box hours="{{hours}}" futureWeather="{{future_weather}}"></Box>
+    <view id="small-tips">
+    tips：{{tips}}
+    </view>
     <view class="box-footer" >
       <view class="box-footer-line1">空气质量指数</view>
       <view class="box-footer-line2">{{now_air.aqi}}</view>
@@ -21,12 +23,16 @@
       <view class="box-footer-line2">{{now_air.primary}}</view>
     </view>
     <view class="box-footer" >
-      <view class="box-footer-line1">SO<text class="text-2">2</text>含量</view>
+      <view class="box-footer-line1">PM2.5</view>
       <view class="box-footer-line2">{{now_air.pm2p5}}</view>
     </view>
     <view class="box-footer" >
       <view class="box-footer-line1">PM10</view>
       <view class="box-footer-line2">{{now_air.pm10}}</view>
+    </view>
+    <view class="box-footer" >
+      <view class="box-footer-line1">SO<text class="text-2">2</text>含量</view>
+      <view class="box-footer-line2">{{now_air.pm2p5}}</view>
     </view>
   </view>
   <view class="footer">

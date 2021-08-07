@@ -77,3 +77,8 @@
   height: 5%;
   border-top:1rpx solid rgb(149, 186, 215);
 }
+#small-tips{
+  color: white;
+  padding:15rpx;
+  border-bottom: 1rpx solid rgb(149, 186, 215);
+}

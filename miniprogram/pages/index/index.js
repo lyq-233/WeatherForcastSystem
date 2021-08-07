@@ -3,20 +3,20 @@ var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var qqmap
 var timer
 wx.cloud.init()
-import {getCityId,getNowWeather,getNowAir,getFutureWeather,getHourWeather} from '../../api/index.js'
+import {getCityId,getNowWeather,getNowAir,getFutureWeather,getHourWeather,getLifeTips} from '../../api/index.js'
 Page({
   /**
    * 页面的初始数据，页面中的回调函数应该与data同层级
    */
   data: {
+    tips:"",
+    hours:[], //24小时天气
     week:"",  //周几
     future_weather:[],  //未来几天的天气数组
-    pm25_color:"skyblue",  //pm2.5的颜色显示
-    airquality_color:"skyblue", //污染程度的颜色显示
     now_air:{}, //现在的空气质量
     now_weather:{}, //现在的天气
     cityid:0, //城市id
-    city:"",
+    city:"", //城市
     latitude:0, //经纬度
     longitude:0,//经纬度
     bgImgSrc:""  //背景图片url
@@ -65,6 +65,8 @@ GetCityId:async function(){
     this.GetNowWeather();
     this.GetNowAir();
     this.GetFutureWeather();
+    this.Get24weather();
+    this.GetLifeTips();
   }) 
 },
 //获取当前天气
@@ -97,22 +99,9 @@ GetNowAir:async function(){
   const result=await getNowAir(cityid,"9a01cb7787194bb6b7ea4dd490255823");
   result.now.primary= result.now.primary==='NA'?'无':result.now.primary
   // console.log(result.now)
-  //根据空气质量设置颜色显示
-  if(result.now.pm2p5>90){
-    this.setData({pm25_color:"red"})
-  }else if(result.now.pm2p5>75){
-    this.setData({pm25_color:"orange"})
-  }
-  if(result.now.aqi>100&&result.now.aqi<=150){
-    this.setData({airquality_color:"yellow"})
-  }else if(result.now.aqi>150&&result.now.aqi<=200){
-    this.setData({airquality_color:"orange"})
-  }else if(result.now.aqi>200){
-    this.setData({airquality_color:"red"})
-  }
   this.setData({now_air:result.now})
 },
-//获取未来三天的天气
+//获取未来7天的天气
 GetFutureWeather:async function(){
   const {cityid}=this.data;
   const result=await getFutureWeather(cityid,"9a01cb7787194bb6b7ea4dd490255823");
@@ -121,8 +110,38 @@ GetFutureWeather:async function(){
     dailyObj.iconDay="../../icons/"+dailyObj.iconDay+".png"
     dailyObj.iconNight="../../icons/"+dailyObj.iconNight+".png"
   })
-  //console.log(result.daily)
+  // console.log(result.daily)
   this.setData({future_weather:result.daily})
+},
+//24小时天气
+Get24weather:async function(){
+  const {cityid}=this.data;
+  let hourtable=['上午12时','上午1时','上午2时','上午3时','上午4时','上午5时','上午6时','上午7时','上午8时','上午9时','上午10时','上午11时','下午12时','下午1时','下午2时','下午3时','下午4时','下午5时','下午6时','下午7时','下午8时','下午9时','下午10时','下午11时']
+  let divid= new Date().getHours()
+  let rest=hourtable.splice(0,divid)
+  hourtable= hourtable.concat(rest)
+  hourtable[0]='现在'
+  const result=await getHourWeather(cityid,"9a01cb7787194bb6b7ea4dd490255823")
+  result.hourly.forEach((HourObj,index)=>{
+    HourObj.icon="../../icons/"+HourObj.icon+".png"
+    HourObj.temp= HourObj.temp+'°'
+    HourObj.hourtime=hourtable[index]
+  })
+  this.setData({
+    hours:result.hourly
+  })
+},
+GetLifeTips:async function(){
+  const {cityid}=this.data;
+  const result=await getLifeTips(cityid,"9a01cb7787194bb6b7ea4dd490255823",'3');
+  // console.log(result)
+  var res=result.daily.reduce((a,b)=>{
+    return a+b.text
+  },"")
+  // console.log(res)
+  this.setData({
+    tips:res
+  })
 },
 //星期几
 GetDay:function(){
@@ -177,6 +196,8 @@ Subdata:function(){
         this.GetNowWeather();
         this.GetNowAir();
         this.GetFutureWeather();
+        this.Get24weather();
+        this.GetLifeTips();
       })
     }else{
      // 实例化API核心类
